@@ -20,35 +20,48 @@ const VoiceSelector = ({
 
   return (
     <div className={cn("space-y-4", className)}>
-      <label className="form-label">Choose Assistant Voice</label>
+      <span className="form-label" id="voice-selector-label">
+        Choose Assistant Voice
+      </span>
 
       {categories.map((category) => (
-        <div key={category.label}>
-          <p className="text-sm font-medium text-[var(--text-secondary)] mb-2">
+        <fieldset
+          key={category.label}
+          className="border-none p-0 m-0"
+          aria-labelledby="voice-selector-label"
+        >
+          <legend className="text-sm font-medium text-[var(--text-secondary)] mb-2">
             {category.label}
-          </p>
+          </legend>
           <div className="voice-selector-options flex-wrap">
             {category.keys.map((key) => {
               const voice = voiceOptions[key as keyof typeof voiceOptions];
               const isSelected = value === key;
 
               return (
-                <button
+                <label
                   key={key}
-                  type="button"
-                  disabled={disabled}
                   className={cn(
-                    "voice-selector-option",
+                    "voice-selector-option cursor-pointer",
                     isSelected
                       ? "voice-selector-option-selected"
                       : "voice-selector-option-default",
-                    disabled && "voice-selector-option-disabled"
+                    disabled && "voice-selector-option-disabled pointer-events-none"
                   )}
-                  onClick={() => onChange(key)}
                 >
+                  <input
+                    type="radio"
+                    name="voice"
+                    value={key}
+                    checked={isSelected}
+                    disabled={disabled}
+                    onChange={() => onChange(key)}
+                    className="sr-only"
+                  />
                   <div className="flex flex-col items-start text-left">
                     <div className="flex items-center gap-2">
                       <span
+                        aria-hidden="true"
                         className={cn(
                           "w-3.5 h-3.5 rounded-full border-2 flex items-center justify-center",
                           isSelected
@@ -68,11 +81,11 @@ const VoiceSelector = ({
                       {voice.description}
                     </p>
                   </div>
-                </button>
+                </label>
               );
             })}
           </div>
-        </div>
+        </fieldset>
       ))}
     </div>
   );
