@@ -21,9 +21,12 @@ const InputField = ({
       name={name}
       render={({ field }) => (
         <FormItem>
-          <label className="form-label">{label}</label>
+          <label htmlFor={field.name} className="form-label">
+            {label}
+          </label>
           <FormControl>
             <input
+              id={field.name}
               type="text"
               className="form-input border border-[var(--border-subtle)] shadow-soft-sm"
               placeholder={placeholder}
