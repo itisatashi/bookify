@@ -5,7 +5,6 @@ import { CreateBook, TextSegment } from "@/types";
 import { escapeRegex, generateSlug, serializeData } from "../utils";
 import Book from "@/database/models/book.model";
 import BookSegment from "@/database/models/book-segment.model";
-import { connect } from "http2";
 import mongoose from "mongoose";
 
 export const getAllBooks = async () => {
