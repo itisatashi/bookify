@@ -39,7 +39,7 @@ export const startVoiceSession = async (
 export const endVoiceSession = async (
   sessionId: string,
   durationSeconds: number,
-): Promise<{ success: boolean }> => {
+): Promise<{ success: boolean; error?: string }> => {
   try {
     await connectToDatabase();
 
