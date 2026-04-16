@@ -48,7 +48,7 @@ export const endVoiceSession = async (
       durationSeconds,
     });
 
-    if (!result) return { success: false, error: "Voice session not found." };
+    if (!result) return { success: false };
 
     return { success: true };
   } catch (e) {
