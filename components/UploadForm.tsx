@@ -25,7 +25,7 @@ import {
   checkBookExists,
   createBook,
   saveBookSegments,
-} from "@/lib/actions/book.action";
+} from "@/lib/actions/book.actions";
 import { parsePDFFile } from "@/lib/utils";
 import { upload } from "@vercel/blob/client";
 

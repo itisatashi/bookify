@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, MicOff, Mic } from "lucide-react";
-import { getBookBySlug } from "@/lib/actions/book.action";
+import { getBookBySlug } from "@/lib/actions/book.actions";
 import VapiControls from "@/components/VapiControls";
 
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {

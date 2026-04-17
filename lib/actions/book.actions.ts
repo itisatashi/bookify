@@ -5,8 +5,8 @@ import { CreateBook, TextSegment } from "@/types";
 import { escapeRegex, generateSlug, serializeData } from "../utils";
 import Book from "@/database/models/book.model";
 import BookSegment from "@/database/models/book-segment.model";
-import { connect } from "http2";
 import mongoose from "mongoose";
+import { revalidatePath } from "next/cache";
 
 export const getAllBooks = async () => {
   try {
@@ -70,6 +70,9 @@ export const createBook = async (data: CreateBook) => {
     // TODO: Check subscription limits before creating a book
 
     const book = await Book.create({ ...data, slug, totalSegments: 0 });
+
+    revalidatePath("/");
+
     return {
       success: true,
       data: serializeData(book),
@@ -138,7 +141,7 @@ export const searchBookSegments = async (
         return {
           success: false,
           data: [],
-         };
+        };
       }
 
       segments = await BookSegment.find({
